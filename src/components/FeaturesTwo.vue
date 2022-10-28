@@ -1,6 +1,8 @@
 <template>
-        <div class="why-choose-one" style="background-image: linear-gradient(rgb(56 56 56 / 28%), rgb(8 8 8 / 88%)), url(https://infovillaallende.com.ar/wp-content/uploads/2018/10/villa-allende.jpg);
+        <div class="why-choose-one" style="background-image: linear-gradient(rgb(56 56 56 / 28%), rgb(8 8 8 / 88%)), 
+        url(https://infovillaallende.com.ar/wp-content/uploads/2018/10/villa-allende.jpg);
     background-repeat: no-repeat;
+
     background-size: cover;">
            <!-- <div class="why-choose-one-bg" style="background-image: url(img/why-choose-one-bg.jpg);"></div>-->
             <div class="why-choose-one-shape-3 float-bob-y-2"></div>
@@ -18,7 +20,7 @@
                                         <img src="img/section-title-shape-1.png" alt="">
                                     </div>
                                 </div>
-                                <h2 class="section-title__title" style="font-size:36px; color:#F3F0ED;">Villa Allende Municipio</h2>
+                                <h2 class="section-title__title" style="font-size:36px; color:var(--roofsie-base);">Villa Allende Municipio</h2>
                             </div>
                             <!--<p class="why-choose-one__text">Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute aboris nisi ut aliquip ex irure reprehederit.</p>-->
                             <div class="why-choose-one__points-box">

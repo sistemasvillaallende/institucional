@@ -1,11 +1,11 @@
 <template>
     <!--Services One Start-->
-    <div class="services-one" id="services">
+    <div class="services-one" id="services" v-if="news != null && news != 'undefined'">
         <div class="services-one-shape-1 float-bob-x">
-            <img src="img/services-one-shape-1.png" alt="">
+            <img src="/img/services-one-shape-1.png" alt="">
         </div>
         <div class="services-one-shape-2">
-            <img src="img/services-one-shape-2.png" alt="">
+            <img src="/img/services-one-shape-2.png" alt="">
         </div>
         <div class="container">
             <div class="services-one__top">
@@ -38,20 +38,20 @@
                             style="visibility: visible; animation-delay: 100ms; animation-name: fadeInUp;">
                             <div class="services-one__single">
                                 <div class="services-one__img">
-                                    <img :src="'img/' + item.img" alt="" style="height: 245px"
+                                    <img :src="$urlBase + '/Assets/Archivos_Pagina_Institucional/Pagina_0/' + item.img +'?v=1'" alt="" style="height: 245px"
                                         v-if="$router.currentRoute.name != 'Page'">
-                                    <img :src="'../img/' + item.img" alt="" style="height: 245px"
-                                        v-else/>
+                                    <img :src="$urlBase + '/Assets/Archivos_Pagina_Institucional/Pagina_' + item.id_page + '/' + item.img"
+                                        alt="" style="height: 245px" v-else />
                                 </div>
                                 <div class="services-one__content">
                                     <div class="services-one__icon">
                                         <span class="icon-joist"></span>
                                     </div>
                                     <p class="services-one__text"><span class="fa fa-calendar"></span>&nbsp;{{
-                                            item._fecha
+                                    item._fecha
                                     }}</p>
                                     <h3 class="services-one__title"><a :href="'/News/' + item.id" target="_blank">{{
-                                            item.titulo
+                                    item.titulo
                                     }}</a></h3>
                                     <div>
                                         <a :href="'/News/' + item.id" target="_blank">Leer mas... <i
@@ -71,14 +71,27 @@
 </template>
 
 <script>
-export default {
-    data: () => ({
-        news: null,
-    }),
-    async mounted() {
-        try {
-            this.news = (await this.$http.get("/News/readHome")).data;
-        } catch (error) { }
-    },
-}
-</script>
+    export default {
+        data: () => ({
+            news: null,
+        }),
+        async mounted() {
+            try {
+                if(this.$route.name != 'Index')
+                    this.news = (await this.$http.get("/News/getBySeccion?seccion=" +  + this.id)).data;
+                else
+                    this.news = (await this.$http.get("/News/getBySeccion?seccion=" +  + this.id)).data;
+            } catch (error) { }
+        },
+        props: {
+            id: {
+                type: [Number, String],
+                default: 0,
+            },
+            tipo: {
+                type: [Number, String],
+                default: "",
+            },
+        },
+    }
+    </script>

@@ -1,7 +1,7 @@
 <template>
         <footer class="site-footer" style="position:absolute; left:0; width: 100%; ">
             <div class="site-footer-img-1">
-                <img src="img/site-footer-img-1.png" style="height: 300px;">
+                <img src="/img/site-footer-img-1.png" style="height: 300px;">
             </div>
             <!--<div class="site-footer-shape-1">
                 <img src="img/site-footer-shape-1.png" alt="">
@@ -20,10 +20,10 @@
                             <div class="footer-widget__column footer-widget__explore clearfix">                                
                                 <ul class="footer-widget__explore-list list-unstyled clearfix">
                                     <li><a href="#">Sitio web oficial de la Municipalidad de Villa Allende</a></li>
-                                    <li><a href="#">Goycoechea 586 - (X5105DUS) Villa Allende, Córdoba.</a></li>
+                                    <li><a href="#">{{ Institucional.direccion }}  {{ Institucional.codigo_postal  }} {{ Institucional.ciudad }} {{ Institucional.provincia }}</a></li>
                                     <li><a href="#">República Argentina</a></li>
-                                    <li><a href="#">Teléfono: 03543 43-9280</a></li>
-                                    <li><a href="#">municipalidad@villaallende.gov.ar​</a></li>
+                                    <li><a href="#">Teléfono: {{ Institucional.telefono }}</a></li>
+                                    <li><a :href="'mailto:'+Institucional.mail">{{ Institucional.mail }}​</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -31,9 +31,9 @@
                             <div class="footer-widget__column footer-widget__newsletter clearfix">
                                 <h3 class="footer-widget__title">Redes Sociales</h3>
 				                <div class="site-footer__social">
-                                    <a href="https://www.facebook.com/municipalidadvillaallende"><i class="fab fa-facebook"></i></a>
-                                    <a href="https://twitter.com/municipalidadva"><i class="fab fa-twitter"></i></a>
-                                    <a href="https://www.youtube.com/user/MunicipalidadVA"><i class="fab fa-youtube"></i></a>
+                                    <a :href="Institucional.facebook" target="_blank"><i class="fab fa-facebook"></i></a>
+                                    <a :href="Institucional.twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                    <a :href="Institucional.youtube" target="_blank"><i class="fab fa-youtube"></i></a>
                                 </div>				
                             </div>
                         </div>
@@ -55,7 +55,28 @@
 <script>
 export default {
     data: () => ({
-
+        menues: null,
+        Institucional: {
+            id: 0,
+            nombre_sitio: "",
+            direccion: "",
+            codigo_postal: "",
+            ciudad: "",
+            provincia: "",
+            pais: "",
+            telefono: "",
+            mail: "",
+            logo: "",
+            facebook: "",
+            instagram: "",
+            twitter: "",
+            youtube: "",
+        },
     }),
+    async mounted() {
+        try {
+            this.Institucional = (await this.$http.get("/Institucional/read")).data;
+        } catch (error) { }
+    },
 }
 </script>

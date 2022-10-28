@@ -13,22 +13,22 @@
             </div>
         </div>
 
-        <div class="main-header-two__middle" style="background-color: white;">
+        <div class="main-header-two__middle" style="background-color: var(--roofsie-blanco);">
             <div class="container">
                 <div class="main-header-two__middle-inner clearfix">
-                    <div class="main-header-two__shape-1" style="border-top: 144px solid #6F6F6E;"></div>
-                    <div class="main-header-two__shape-2" style="border-top: 96px solid #FFD300;"></div>
+                    <div class="main-header-two__shape-1" style="border-top: 144px solid var(--roofsie-gray);"></div>
+                    <div class="main-header-two__shape-2" style="border-top: 96px solid var(--roofsie-white);"></div>
                     <div class="main-header-two__shape-3"></div>
-                    <div class="main-header-two__shape-4" style="background-color: #F3F0ED;"></div>
+                    <div class="main-header-two__shape-4" style="background-color: var(--roofsie-base);"></div>
                     <div class="main-header-two__shape-5"></div>
-                    <div class="main-header-two__shape-6" style="border-bottom: 93px solid #FFD300;"></div>
+                    <div class="main-header-two__shape-6" style="border-bottom: 93px solid var(--roofsie-white);"></div>
                     <div class="main-header-two__shape-7"></div>
                     <div class="main-header-two__logo">
                         <a  href="../Guia"><img src="../../assets/img/LogoVertical2.png" alt=""></a>
                     </div>
                     <div class="main-header-two__address">
                         <h2 class="section-title__title"
-                            style="color: #6f6f6e; font-size: 40px; line-height: 10px; text-decoration-line: overline;">
+                            style="color: var(--roofsie-gray); font-size: 40px; line-height: 10px; text-decoration-line: overline;">
                             <img src="../../assets/img/Tramites.png" style="height: 70px; margin-top: -20px;" /> Guia de
                             Tramites
                         </h2>
@@ -40,8 +40,8 @@
             <div class="main-menu-two__wrapper clearfix">
                 <div class="container">
                     <div class="main-menu-two__wrapper-inner clearfix"
-                        style="min-height: 90px; max-height:90px;  background-color: #f4f0ed;">
-                        <div class="main-menu-two__wrapper-inner-bg" style="background-color: #f5f0ed;">
+                        style="min-height: 90px; max-height:90px;  background-color: var(--roofsie-base);">
+                        <div class="main-menu-two__wrapper-inner-bg" style="background-color: var(--roofsie-base);">
                         </div>
                         <div class="main-menu-two__right" style="float:none; display:block;">
                             <div class="main-menu-two__search-box" style="padding: 20px 0;">

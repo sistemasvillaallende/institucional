@@ -10,7 +10,7 @@
                             <div class="about-one__img-box wow slideInLeft animated" data-wow-delay="100ms" data-wow-duration="2500ms" 
 							style="visibility: visible; animation-duration: 2500ms; animation-delay: 100ms; animation-name: slideInLeft;">
                                 <div class="about-one__img">
-                                    <img src="img/despapelizacion.jpg" alt="">
+                                    <img :src="$urlBase + '/Assets/Archivos_Pagina_Institucional/Pagina_0/' + noticia_principal.img" alt="">
                                 </div>
                                 <div class="about-one__line">
                                     <img src="img/about-one-line.png" alt="">
@@ -22,45 +22,14 @@
                         <div class="about-one__right">
                             <div class="section-title text-left">
                                 <div class="section-sub-title-box">
-                                    <p class="section-sub-title" style="color:#8f8f8f;">Despapelización Municipal</p>
+                                    <p class="section-sub-title" style="color:#8f8f8f;">{{ noticia_principal.encabezado }}</p>
                                     <div class="section-title-shape-1">
                                         <img src="img/section-title-shape-1.png" alt="">
                                     </div>
                                 </div>
-                                <h2 class="section-title__title">Ahora todos tus cedulones en la WEB</h2>
+                                <h2 class="section-title__title">{{ noticia_principal.titulo }}</h2>
                             </div>
-                            <p class="about-one__text">Contribuyamos juntos a la despapelización, evitemos la contaminación y <strong>colaboremos</strong> con nuestro medio ambiente.</p>
-                            <ul class="list-unstyled about-one__points" style="display: block;">
-                                <li>
-                                    <div class="icon-box">
-                                        <div class="icon">
-                                            <span class="icon-confirmation" style="color: #ffd142;"></span>
-                                        </div>
-                                        <div class="text-box">
-                                            <p>No mas papel</p>
-                                        </div>
-                                    </div>
-                                    <div class="text-box-two">
-                                        <p>A partir del 28 de Febrero NO <strong>se enviarán cedulones de Tasas Municipales en soporte papel,</strong>
-										ni se realizará su distribución postal (Decreto 219/21).</p>
-                                    </div>
-                                </li>
-                                <li style="margin-left: 0; margin-top:20px;">
-                                    <div class="icon-box">
-                                        <div class="icon">
-                                            <span class="icon-confirmation" style="color: #ffd142;"></span>
-                                        </div>
-                                        <div class="text-box">
-                                            <p>¿Necesitas tus comprobantes impresos?</p>
-                                        </div>
-                                    </div>
-                                    <div class="text-box">
-                                        <p>Podras descargarlos de nuestra web, ingresando a <br/>
-										<a href="https://vecino.villaallende.gov.ar" style="color:#0d6efd">vecino.villaallende.gov.ar</a>
-										o solicitarlos en los boxes de <strong>Atención al Ciudadano del Muicipio</strong></p>
-                                    </div>
-                                </li>
-                            </ul>
+                            <div v-html="noticia_principal.contenido"></div>
                             
                         </div>
                     </div>
@@ -72,7 +41,12 @@
 <script>
 export default {
     data: () => ({
-
+        noticia_principal: null,
     }),
+    async mounted() {
+        try {
+            this.noticia_principal = (await this.$http.get("/NoticiaPrincipal/getByPk")).data;
+        } catch (error) { }
+    },    
 }
 </script>

@@ -1,64 +1,74 @@
 <template>
-    <v-container fluid style="padding-top:80px; padding-bottom: 80px;">
+    <v-container fluid style="padding-top:80px; padding-bottom: 80px;" v-if="seccion != null && seccion != 'undefined'">
         <v-container>
             <v-row>
                 <v-col cols="12">
                     <h2 style="position: relative;
-                        font-size: 40px;
-                        color: #6f6f6e;
+                        color: var(--roofsie-gray);
                         font-weight: 800;
                         line-height: 40px;
-                        margin-bottom: 10px;">Titulo</h2>
+                        margin-bottom: 10px;">{{ seccion.titulo }}</h2>
                     <p style="
                         font-size: 18px;
-                        color: #6f6f6e;
+                        color: var(--roofsie-gray);
                         line-height: 18px;
-                        margin-bottom: 10px;">Subtitulo</p>
+                        margin-bottom: 10px;">{{ seccion.subtitulo }}</p>
                 </v-col>
             </v-row>
-            <v-row>
-                <v-col cols="12">
-                    <v-card>
-                        <v-tabs color="deep-purple accent-4" right>
-                            <v-tab>Landscape</v-tab>
-                            <v-tab>City</v-tab>
-                            <v-tab>Abstract</v-tab>
 
-                            <v-tab-item v-for="n in 3" :key="n">
-                                <v-container fluid>
-                                    <v-row>
-                                        <v-col v-for="i in 6" :key="i" cols="12" md="4">
-                                            <v-img :src="`https://picsum.photos/500/300?image=${i * n * 5 + 10}`"
-                                                :lazy-src="`https://picsum.photos/10/6?image=${i * n * 5 + 10}`"
-                                                aspect-ratio="1"></v-img>
-                                        </v-col>
-                                    </v-row>
-                                </v-container>
-                            </v-tab-item>
-                        </v-tabs>
-                    </v-card>
-                </v-col>
-            </v-row>
+            <div class="work-page__bottom"
+                style="margin-top:30px;">
+                <hr />
+                <div class="row filter-layout masonary-layout"
+                    style="position: relative; margin-top: 30px;">
+                    <!--Project One Single Start-->
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 filter-item comm res"
+                        style="left: 0px; top: 0px; margin-top: 20px;" 
+                        v-for="(item, index) in seccion.lstContenido" :key="index">
+                        <div class="project-one__single">
+                            <div class="project-one__img-box">
+                                <div class="project-one__img" style="text-align:center;">
+                                    <img :src="$urlBase + '/Assets/Archivos_Pagina_Institucional/Pagina_' + seccion.id_page + '/' + item.imagen"
+                                        alt="" style="height: 300px; width: auto;">
+                                </div>
+                                <div class="project-one__content">
+                                    <h4 class="project-one__title"><a href="#">{{ item.nombre }}</a>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </v-container>
     </v-container>
 </template>
 <style scoped>
 .v-tab--active {
-    background-color: #6f6f6e !important;
-    color: #ffd142 !important;
+    background-color: var(--roofsie-gray) !important;
+    color: var(--roofsie-white) !important;
     font-weight: 800;
 }
 </style>
 <script>
 export default {
     data: () => ({
-        news: null,
-        tab: null
+        seccion: null,
     }),
     async mounted() {
         try {
-            this.news = (await this.$http.get("/News/readHome")).data;
+            this.seccion = (await this.$http.get("/Seccion/getByPkActivos?pk=" + this.id)).data;
         } catch (error) { }
+    },
+    props: {
+        id: {
+            type: [Number, String],
+            default: 0,
+        },
+        tipo: {
+            type: [Number, String],
+            default: "",
+        },
     },
 }
 </script>

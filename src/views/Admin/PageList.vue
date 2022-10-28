@@ -7,7 +7,7 @@
                     <v-col cols="12" style="text-align: right">
                         <v-btn @click="addPage()"
                             style="background-color: #1c3e89 !important; color: white !important;">NUEVA
-                            SECRETARÍA
+                            PAGINA
                         </v-btn>
                     </v-col>
                 </v-row>
@@ -15,7 +15,7 @@
                     <v-col cols="12">
                         <v-card style="min-height: 300px;">
                             <v-card-title>
-                                Secretarías
+                                Paginas
                                 <v-spacer></v-spacer>
                                 <v-text-field v-model="search" append-icon="mdi-magnify" label="Buscar" single-line
                                     hide-details></v-text-field>
@@ -68,7 +68,7 @@
                                     font-size: 20px;
                                     font-family: 'DM Sans';
                                 ">
-                                    ¿Esta seguro de eliminar la secretaria?
+                                    ¿Esta seguro de eliminar la pagina?
                                 </div>
                             </v-card-text>
                             <v-card-actions class="justify-end">
@@ -110,11 +110,11 @@
                         <v-card>
                             <v-toolbar style="
                                 " dark>
-                                <v-card-title>Crear Secretaría</v-card-title>
+                                <v-card-title>Crear Pagina</v-card-title>
                             </v-toolbar>
 
                             <v-card-text style="margin-top:30px;">
-                                <v-text-field v-model="nombre" placeholder="Ingrese el nombre de la secretaria">
+                                <v-text-field v-model="nombre" placeholder="Ingrese el nombre de la pagina">
                                 </v-text-field>
                             </v-card-text>
                             <v-card-actions class="justify-end">
@@ -164,6 +164,9 @@ export default {
     },
     async mounted() {
         try {
+            if (this.$storage.getTextOrInt("codUsuario") == null) {
+                this.$router.push("/");
+            }
             this.paginas = (await this.$http.get("/Paginas/read")).data;
         } catch (error) { }
     },
@@ -173,7 +176,7 @@ export default {
         },
         async crearPagina() {
             if (this.nombre == "") {
-                this.txtError = "Por favor ingrese el nombre de la secretaría";
+                this.txtError = "Por favor ingrese el nombre de la pagina";
                 this.dialogError = true;
                 return;
             }

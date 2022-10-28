@@ -11,7 +11,7 @@
 </template>
 <style>
 a:hover, a:focus {
-    box-shadow: 0 1px #6F6F6E !important;
+    box-shadow: 0 1px var(--roofsie-gray) !important;
 }
 </style>
 <script>

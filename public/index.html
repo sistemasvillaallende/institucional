@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="overflow-x:hidden;">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
@@ -39,7 +39,7 @@
     <link rel="stylesheet" href="https://vecino.villaallende.gov.ar/estilos/css/demo.css">
     <link rel="stylesheet" href="https://vecino.villaallende.gov.ar/estilos/css/icon-moon.css">
     <!-- template styles -->
-    <link rel="stylesheet" href="https://vecino.villaallende.gov.ar/estilos/css/roofsie.css">
+    <link rel="stylesheet" href="https://vecino.villaallende.gov.ar/estilos/css/roofsie.css?v=1">
     <link rel="stylesheet" href="https://vecino.villaallende.gov.ar/estilos/css/roofsie-responsive.css">
 
     <!-- Smartsupp Live Chat script -->
@@ -64,6 +64,30 @@
     border: none !important;
     box-shadow: 0 0 0 0.25rem rgb(255 209 66 / 85%);
 }
+
+:root {
+  --roofsie-font: 'Manrope', sans-serif;
+  --roofsie-reey-font: "reeyregular";
+  /*--roofsie-gray: #6c6b6f;*/
+  --roofsie-gray: #6F6F6E;
+  /*--roofsie-gray-rgb: 108, 107, 111;*/
+  --roofsie-gray-rgb: 111, 111, 110;
+  --roofsie-white: #FFD300;
+  --roofsie-white-rgb: 255, 211, 0;
+  /*--roofsie-base: #ff4f47;*/
+  --roofsie-base: #F3F0ED;
+  /*--roofsie-base-rgb: 255, 79, 71;*/
+  --roofsie-base-rgb: 243, 240, 237;
+  --roofsie-black: #1c1b1f;
+  --roofsie-black-rgb: 28, 27, 31;
+  /*--roofsie-primary: #f4f1ee;*/
+  --roofsie-primary: #C6C6C5;
+  /*--roofsie-primary-rgb: 244, 241, 238;*/
+  --roofsie-primary-rgb: 198, 198, 197;
+
+  --roofsie-bdr-radius: 5px;
+  --roofsie-blanco: white;  
+}
 		</style>
 
 
@@ -74,7 +98,7 @@
       }
     </style>
   </head>
-  <body>
+  <body style="overflow-x:hidden;">
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
@@ -116,6 +140,9 @@
     <script src="https://vecino.villaallende.gov.ar/estilos/js/roofsie.js"></script>
 
     <style>
+      ::-webkit-scrollbar {
+    display: none;
+}
         .ubey-RecordingScreen-count-down-container {
             position: fixed;
             height: 100vh;

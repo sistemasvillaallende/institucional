@@ -10,9 +10,7 @@ import $storage from './plugins/storage';
 
 Vue.config.productionTip = false
 if (process.env.NODE_ENV == 'development') {
-    // axios.defaults.baseURL = 'https://localhost:44337';
     axios.defaults.baseURL = 'http://localhost:5000';
-    //axios.defaults.baseURL = '//apibeinfinitus.niufleex.com';
 }
 else {
     axios.defaults.baseURL = 'http://10.0.0.200/institucional_api';

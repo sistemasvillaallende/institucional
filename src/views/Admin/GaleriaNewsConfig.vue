@@ -1,22 +1,11 @@
 <template>
-    <div v-if="seccion != null && seccion != 'undefined'">
+    <div v-if="imagenes != null && imagenes != 'undefined'">
         <Header></Header>
         <v-container style="margin-top:50px; border: solid 1px lightgray;
                                         border-radius: 15px;">
             <v-row>
-                <v-col cols="12">
-                    <v-text-field v-model="seccion.titulo" placeholder="Titulo de la Sección"></v-text-field>
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-col cols="12">
-                    <v-text-field v-model="seccion.subtitulo" placeholder="Subtitulo de la Sección"></v-text-field>
-                </v-col>
-            </v-row>
-            <v-row>
                 <v-col cols="12" style="text-align:right;">
                     <v-btn class="btn btn-primary" @click="salir()">Salir</v-btn>&nbsp;
-                    <v-btn class="btn btn-primary" @click="updateSeccion()">Guardar</v-btn>
                 </v-col>
             </v-row>
         </v-container>
@@ -55,11 +44,10 @@
             <v-row>
                 <v-col cols="12">
                     <table style="width: 100%">
-                        <Draggable :list="seccion.lstContenido" tag="tbody" @end="saveorden()">
-                            <tr v-for="(item, index) in seccion.lstContenido" :key="index"
-                                style="border: solid 1px lightgray;">
+                        <Draggable :list="imagenes" tag="tbody" @end="saveorden()">
+                            <tr v-for="(item, index) in imagenes" :key="index" style="border: solid 1px lightgray;">
                                 <td><img style="height:80px;"
-                                        :src="$urlBase + '/Assets/Archivos_Pagina_Institucional/Pagina_' + seccion.id_page + '/' + item.imagen"
+                                        :src="$urlBase + '/Assets/Archivos_Pagina_Institucional/Pagina_' + item.categoria + '/' + item.img"
                                         aspect-ratio="1" class="grey lighten-2" /></td>
                                 <td>
                                     <input type="checkbox" class="check" :id="item.id" :value="item.id"
@@ -156,6 +144,7 @@ export default {
             id_contenido: 0,
             titulo_contenido: "",
             contenido_contenido: "",
+            imagenes: null,
         };
     },
     components: {
@@ -169,58 +158,20 @@ export default {
             if (this.$storage.getTextOrInt("codUsuario") == null) {
                 this.$router.push("/");
             }
-            this.seccion = (await this.$http.get("/Seccion/getByPk?pk=" + this.$route.params.id)).data;
+            this.imagenes = (await this.$http.get("/News/getImages?idNews=" + this.$route.params.id)).data;
         } catch (error) { }
     },
     methods: {
         salir() {
-            this.$router.push("/PageConfig/" + this.seccion.id_page);
-        },
-        async updateSeccion() {
-            let post = {
-                id: this.$route.params.id,
-                titulo: this.seccion.titulo,
-                subtitulo: this.seccion.subtitulo,
-                _tipo: "",
-            };
-            this.seccion = (await this.$http.post("/Seccion/update", post)).data;
-            this.dialogOk = true;
-        },
-        agregarContenido() {
-            this.id_contenido = 0;
-            this.titulo_contenido = "";
-            this.contenido_contenido = "";
-            this.dialogContenido = true;
-        },
-        editarContenido(id, titulo_contenido, contenido_contenido) {
-            this.id_contenido = id;
-            this.titulo_contenido = titulo_contenido;
-            this.contenido_contenido = contenido_contenido;
-            this.dialogContenido = true;
-        },
-        async guardarContenido() {
-            let post = {
-                id: this.id_contenido,
-                titulo_contenido: this.titulo_contenido,
-                contenido_contenido: this.contenido_contenido,
-                id_seccion: this.$route.params.id,
-            };
-            if (this.id_contenido == 0) {
-                this.seccion = (await this.$http.post("/Seccion/insertContenido", post)).data;
-            }
-            else {
-                this.seccion = (await this.$http.post("/Seccion/updateContenido", post)).data;
-            }
-            this.dialogOk = true;
-            this.dialogContenido = false;
+            this.$router.push("/Home/");
         },
         async saveorden() {
-            (await this.$http.post("/Seccion/reordenarContenido", this.seccion));
+            (await this.$http.post("/News/reordenarGaleria", this.imagenes));
         },
         async deleteImagenes() {
-            (await this.$http.post("/Seccion/deleteGaleria", this.checkedNames));
+            (await this.$http.post("/News/deleteGaleria", this.checkedNames));
             this.dialogDelete = false;
-            this.seccion = (await this.$http.get("/Seccion/getByPk?pk=" + this.$route.params.id)).data;
+            this.imagenes = (await this.$http.get("/News/getImages?idNews=" + this.$route.params.id)).data;
             this.checkedNames = [];
         },
         logicDelete(id) {
@@ -235,16 +186,15 @@ export default {
                 for (var index = 0; index < this.files.length; index++) {
                     InstFormData.append('file[]', this.files[index]);
                 }
-                InstFormData.append('id_seccion', this.$route.params.id);
-                InstFormData.append('id_pagina', this.seccion.id_page);
-                this.pagina = (await this.$http.post("/Seccion/UploadFile", InstFormData, {
+                InstFormData.append('id_news', this.$route.params.id);
+                this.pagina = (await this.$http.post("/News/UploadGaleria", InstFormData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
                 })).data;
                 this.files = null;
             }
-            this.seccion = (await this.$http.get("/Seccion/getByPk?pk=" + this.$route.params.id)).data;
+            this.imagenes = (await this.$http.get("/News/getImages?idNews=" + this.$route.params.id)).data;
             this.dialogOk = true;
 
         },

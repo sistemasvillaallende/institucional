@@ -1,7 +1,7 @@
 <template>
     <!--Main Slider Start-->
     <div class="main-slider clearfix" id="home">
-        <div class="swiper-container thm-swiper__slider swiper-container-fade swiper-container-initialized swiper-container-horizontal"
+        <div style="width:100%;" class="swiper-container thm-swiper__slider swiper-container-fade swiper-container-initialized swiper-container-horizontal"
             data-swiper-options="{&quot;slidesPerView&quot;: 1, &quot;loop&quot;: true,
                 &quot;effect&quot;: &quot;fade&quot;,
                 &quot;pagination&quot;: {
@@ -21,7 +21,8 @@
                     v-for="(item, index) in carrusel" :key="index"
                     style="width: 1583px; transition-duration: 0ms; opacity: 1; transform: translate3d(-1583px, 0px, 0px);">
                     <div class="image-layer"
-                    :style="{ 'background-image': 'url(img/' + item.img + ')' }"></div>
+                        :style="{ 'background-image': 'url(' + $urlBase + '/Assets/Archivos_Pagina_Institucional/Pagina_0' + '/' + item.img + ')' }">
+                    </div>
                     <!-- /.image-layer -->
 
                     <div class="container">
@@ -32,8 +33,9 @@
                                     <h2 class="main-slider__title">{{ item.titulo }}</h2>
                                     <p class="main-slider__text" v-html="item.bajada"></p>
                                     <div class="main-slider__btn-box">
-                                        <a :href="item.callToActionLink" class="btn btn-outline-warning" :target="item.callToActionTipo"
-                                            style="padding:15px; font-weight:700"> {{ item.callToAction }} </a>
+                                        <a :href="item.callToActionLink" class="btn btn-outline-warning"
+                                            :target="item.callToActionTarget" style="padding:15px; font-weight:700"> {{
+                                            item.callToAction }} </a>
                                     </div>
                                 </div>
                             </div>
@@ -59,7 +61,20 @@
     </div>
     <!--Main Slider End-->
 </template>
-
+<style>
+.swiper-container {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    overflow: hidden !important;
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+}
+.main-slider__text{
+    padding-right: 25px !important;
+}
+</style>
 <script>
 
 export default {

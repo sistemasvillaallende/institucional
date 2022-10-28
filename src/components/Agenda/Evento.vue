@@ -1,34 +1,75 @@
 <template>
     <!--Services One Start-->
-    <v-container>
-        <v-row style="margin-bottom: 20px; box-shadow: 10px 10px 5px -6px rgb(0 0 0 / 75%);
-    -webkit-box-shadow: 10px 10px 5px -6px rgb(0 0 0 / 75%);
-    -moz-box-shadow: 10px 10px 5px -6px rgba(0,0,0,0.75);">
-            <v-col cols="12" md="12" sm="12" xs="12" lg="3" xl="3" style="border: solid 1px lightgray; padding: 0;">
-                <img style="width: 100%;"
-                    src="https://www.neuquencapital.gov.ar/wp-content/uploads/2022/07/WhatsApp-Image-2022-07-25-at-12.47.53-PM-300x300.jpeg" />
+    <v-container v-if="event != null && event != 'undefined'" style=" border-bottom: solid lightgray; margin-top:30px;">
+        <v-row style="margin-bottom: 20px;">
+            <v-col cols="12" md="12" sm="12" xs="12" lg="2" xl="2" style="background-color: transparent; padding: 0;">
+                <img style="height: 100%; width: 100%; border-radius: 15px;"
+                    :src="$urlBase + '/Assets/Archivos_Pagina_Institucional/Pagina_' + event.id_page + '/' + event.imagen" />
             </v-col>
-            <v-col cols="12" md="12" sm="12" xs="12" lg="6" xl="6"
-                style="padding:20px; display: grid; align-items: center; border: solid 1px lightgray; background-color: white;">
+            <v-col cols="12" md="12" sm="12" xs="12" lg="7" xl="7" style="padding-left:20px;  align-items: center; 
+                 background-color: var(--roofsie-blanco);">
+                <v-row>
+                    <v-col cols="12">
+                        <h4 style="font-weight: 800;">{{ event.nombre }}</h4>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col cols="12" md="12" sm="12" xs="12" lg="3" xl="3" style="padding-top:0px;">
+                        <v-card class="mx-auto" elevation="10">
+                            <v-system-bar
+                                style="padding: 15px; height:auto; text-align:center; background-color: var(--roofsie-gray);">
+                                <h2 style="color:white; width: 100%; text-align: center; font-size: 16px;">{{ event.mes
+                                }}
+                                </h2>
+                            </v-system-bar>
 
-                <div>
-                    <h3>Desfile Aniversario de la Ciudad</h3>
-                    Bajada de Linea Bajada de Linea Bajada de Linea Bajada de Linea Bajada de Linea Bajada de Linea
-                    Bajada de Linea
-                    <br/>
-                    <a href="#" class="btn btn-outline-warning" target="_blank"
-                                            style="padding:10px; font-weight:700; margin-top:30px"> MAS INFORMACIÓN </a>
-                </div>
+                            <div style="text-align:center;    height: 80px;">
+                                <p style="width: 100%;
+                            font-size: 30px;
+                            font-weight: 800;
+                            margin-top: 10px;    margin-bottom: 0px;">{{ event.dia }}
+                                </p>
+                                <p style="width:100%; font-size: 16px;">{{ event.hora_desde }}hs.</p>
+                            </div>
+                        </v-card>
+                    </v-col>
+                    <v-col cols="12" md="12" sm="12" xs="12" lg="9" xl="9"
+                        style="align-items: center; background-color: white;">
+                        <div v-html="event.descripcion"></div>
+                    </v-col>
+                </v-row>
             </v-col>
-            <v-col cols="12" md="12" sm="12" xs="12" lg="3" xl="3" style="border: solid 1px lightgray; display: grid; align-items: center; background-color: white;">
-                <v-list disabled>
+            <v-col cols="12" md="12" sm="12" xs="12" lg="3" xl="3" style="background-color: white;">
+                <v-list>
                     <v-list-item-group color="primary">
-                        <v-list-item v-for="(item, i) in items" :key="i">
-                            <v-list-item-icon style="margin-right: 0px;"> 
-                                <i :class="item.icon" style="color: #ffd142; margin-right: 20px;"></i>
+                        <v-list-item>
+                            <v-list-item-icon style="margin-right: 0px;">
+                                <i class="fa fa-credit-card"
+                                    style="color: var(--roofsie-white); margin-right: 20px;"></i>
                             </v-list-item-icon>
                             <v-list-item-content>
-                                <v-list-item-title v-text="item.text" style="color: #1c1b1f; font-weight: 700;"></v-list-item-title>
+                                <v-list-item-title style="color: var(--roofsie-black); font-weight: 700;">${{
+                                event.precio }}</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item @click="dialog_ubicacion_vista = true">
+                            <v-list-item-icon style="margin-right: 0px;">
+                                <i class="fa fa-map-marker"
+                                    style="color: var(--roofsie-white); margin-right: 20px;"></i>
+                            </v-list-item-icon>
+                            <v-list-item-content>
+                                <v-list-item-title style="color: var(--roofsie-black); font-weight: 700;">{{ event.lugar
+                                }}</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item @click="dialog_mas_info = true">
+                            <v-list-item-icon style="margin-right: 0px;">
+                                <i class="fa fa-info-circle"
+                                    style="color: var(--roofsie-white); margin-right: 20px;"></i>
+                            </v-list-item-icon>
+                            <v-list-item-content>
+                                <v-list-item-title style="color: var(--roofsie-black); font-weight: 700;">Mas
+                                    Información...</v-list-item-title>
                             </v-list-item-content>
                         </v-list-item>
                     </v-list-item-group>
@@ -43,7 +84,7 @@
             </template>
             <v-card>
                 <v-card-title class="text-h5" style="text-align:center; display: block;">
-                    {{ this.modal_ubicacion_vista.nombre_general }}
+                    {{ this.event.lugar }}
                     <hr style="border: solid 1px lightgrey;
               margin-top: 10px;
               margin-bottom: 10px;" />
@@ -51,19 +92,39 @@
                 <v-card-text>
                     <v-row>
                         <v-col cols="12" style="text-align:center;">
-                            <p>{{ modal_ubicacion_vista.direccion }}</p>
-                        </v-col>
-
-                    </v-row>
-                    <v-row>
-                        <v-col cols="12" style="text-align:center;">
-                            <div v-html="modal_ubicacion_vista.mapa" class="map-responsive"></div>
+                            <div v-html="event.mapa" class="map-responsive"></div>
                         </v-col>
                     </v-row>
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn @click="dialog_ubicacion_vista = false">
+                        Salir
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+        <!--MODAL VER MAS INFORMACION-->
+        <v-dialog v-model="dialog_mas_info" max-width="60%">
+            <template v-slot:activator="{ on, attrs }">
+            </template>
+            <v-card>
+                <v-card-title class="text-h5" style="text-align:center; display: block;">
+                    Mas Información
+                    <hr style="border: solid 1px lightgrey;
+              margin-top: 10px;
+              margin-bottom: 10px;" />
+                </v-card-title>
+                <v-card-text>
+                    <v-row>
+                        <v-col cols="12" style="text-align:center;">
+                            <div v-html="event.mas_informacion"></div>
+                        </v-col>
+                    </v-row>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn @click="dialog_mas_info = false">
                         Salir
                     </v-btn>
                 </v-card-actions>
@@ -282,23 +343,28 @@ body ol>li:last-child {
 <script>
 export default {
     data: () => ({
+        dialog_mas_info: false,
         dialog_ubicacion_vista: false,
         modal_ubicacion_vista: {
-                direccion:"",
-                mapa: "",
-            },
-        news: null,
+            direccion: "",
+            mapa: "",
+        },
+        event: null,
         items: [
-            { text: '01 - 31 AGO', icon: 'fa fa-calendar' },
-            { text: 'Evento todo el dia', icon: 'fa fa-clock' },
-            { text: 'Evento Gratuito', icon: 'fa fa-credit-card' },
-            { text: 'Polideportivo Villa Allende', icon: 'fa fa-map-marker' },            
+            { text: 'Casa de la cultura', icon: 'fa fa-map-marker' },
+            { text: 'Mas Informacion', icon: 'fa fa-info' },
         ],
     }),
     async mounted() {
         try {
-            this.news = (await this.$http.get("/News/readHome")).data;
+            this.event = (await this.$http.get("/Evento/getByPk?id=" +
+                this.$route.params.id)).data;
         } catch (error) { }
     },
+    props: {
+        event_prop: {
+            type: Object,
+        },
+    }
 }
 </script>

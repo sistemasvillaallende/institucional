@@ -3683,9 +3683,9 @@ ul {
   position: absolute;
   top: -335px;
   right: 309px;
-  background-image: -moz-linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #FFD300 100%);
-  background-image: -webkit-linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #FFD300 100%);
-  background-image: -ms-linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #FFD300 100%);
+  background-image: -moz-linear-gradient(90deg, rgba(255, 255, 255, 0) 0%,var(--roofsie-white) 100%);
+  background-image: -webkit-linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, var(--roofsie-white) 100%);
+  background-image: -ms-linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, var(--roofsie-white) 100%);
   opacity: 0.502;
   width: 98px;
   height: 765px;
@@ -3880,7 +3880,7 @@ ul {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #f3f0ed;
+  background-color: var(--roofsie-base);
   border-radius: var(--roofsie-bdr-radius);
   opacity: 0;
   -webkit-transition: .5s;
@@ -4917,7 +4917,7 @@ ul {
 }
 
 .footer-widget__about-text {
-  color: #F3F0ED;
+  color: var(--roofsie-base);
   line-height: 30px;
   font-size: 20px;
   font-weight: 700;
@@ -5000,7 +5000,7 @@ ul {
 
 .footer-widget__title {
   font-size: 20px;
-  color: #F3F0ED;
+  color: var(--roofsie-base);
   font-weight: 800;
   line-height: 20px;
   margin-bottom: 30px;

@@ -18,11 +18,13 @@ a,
 div {
   word-break: break-word !important;
 }
+
 .v-application a {
-    color: #6F6F6E !important;
+  color: var(--roofsie-gray) !important;
 }
+
 .v-tab--active {
-  background-color: white !important;
+  background-color: var(--roofsie-blanco) !important;
   color: black !important;
   font-weight: 800;
 }
@@ -68,7 +70,6 @@ export default {
   },
 
   data: () => ({
-    drawer: false,
     drawer2: false,
     nombre_completo: '',
   }),
@@ -85,7 +86,7 @@ export default {
       this.$forceUpdate();
       this.$router.push("/");
     },
-    inicio(){
+    inicio() {
       this.$router.push("/Home");
     }
   }

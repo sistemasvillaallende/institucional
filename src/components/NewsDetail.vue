@@ -4,13 +4,13 @@
             <div class="col-xl-8 col-lg-7" v-if="this.news != null && this.news != 'undefined'">
                 <div class="blog-details__left">
                     <div class="blog-details__img">
-                        <img :src="'/img/' + news.img" alt="">
+                        <img :src="$urlBase + '/Assets/Archivos_Pagina_Institucional/Pagina_' + news.seccion + '/' + news.img" alt="">
                     </div>
                     <div class="blog-details__content">
                         <ul class="list-unstyled blog-details__meta" style="padding-left:0">
                             <li style="font-weight:700">
                                 <i class="far fa-calendar"
-                                    style="font-size:24px;color: #ffd142; margin-right: 15px; text-decoration:none !important; font-weight:700"></i>
+                                    style="font-size:24px;color: var(--roofsie-white); margin-right: 15px; text-decoration:none !important; font-weight:700"></i>
                                 {{ news._fecha }}
                             </li>
                             <!--<li><span>||</span></li>
@@ -26,7 +26,7 @@
             </div>
             <div class="col-xl-4 col-lg-5">
                 <div class="sidebar">
-                    <div class="sidebar__single sidebar__post">
+                    <div class="sidebar__single sidebar__post" style="background-color:var(--roofsie-base);">
                         <h3 class="sidebar__title">Ultimas Noticias</h3>
                         <ul class="sidebar__post-list list-unstyled"
                             v-if="this.listnews != null && this.listnews != 'undefined'">
@@ -46,19 +46,18 @@
         <div class="work-page__bottom" v-if="this.listimages != null && this.listimages != 'undefined'"
             style="margin-top:30px;">
             <hr />
-            <h3>Imagenes</h3>
             <div class="row filter-layout masonary-layout" style="position: relative; height: 620px; margin-top: 30px;">
                 <!--Project One Single Start-->
-                <div class="col-xl-4 col-lg-6 col-md-6 filter-item comm res"
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 filter-item comm res"
                     style="left: 0px; top: 0px; margin-top: 20px;" v-for="(item, index) in listimages" :key="index">
                     <div class="project-one__single">
                         <div class="project-one__img-box">
                             <div class="project-one__img" style="text-align:center;">
-                                <img :src="'https://vecino.villaallende.gov.ar/estilos/Assets/ImagesNews/' + item.img + '?v=1'"
+                                <img :src="$urlBase + '/Assets/Archivos_Pagina_Institucional/Pagina_' + item.categoria + '/' + item.img"
                                     alt="" style="height: 300px; width: auto;">
                             </div>
                             <div class="project-one__content">
-                                <h4 class="project-one__title"><a href="work-details.html">{{ item.nombre }}</a>
+                                <h4 class="project-one__title"><a href="#">{{ item.nombre }}</a>
                                 </h4>
                             </div>
                         </div>
@@ -84,7 +83,7 @@
 <style>
 a:hover,
 a:focus {
-    box-shadow: 0 1px #6F6F6E !important;
+    box-shadow: 0 1px var(--roofsie-gray) !important;
 }
 </style>
 <script>
