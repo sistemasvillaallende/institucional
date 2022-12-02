@@ -1,9 +1,9 @@
 <template>
-    <v-container fluid style="padding: 0px; padding-bottom: 30px; max-width: 100% !important;"  
-    v-if="pagina != null && pagina != 'undefined' && pagina.seccion_pricipal">
-        <section class="page-header" style="margin-bottom: 50px;">
+    <v-container fluid style="padding: 0px; padding-bottom: 30px; max-width: 100% !important;">
+        <section class="page-header"
+        style="margin-bottom: 10px; height:460px; padding: 171px 0 138px">
             <div class="page-header-bg">
-            <img style="height:360px; width: 100%;" 
+            <img style="height:460px; width: 100%;" 
             :src="$urlBase + '/Assets/Archivos_Pagina_Institucional/Pagina_' + pagina.id + '/' + pagina.imagen"/>
             </div>
             <div class="container">
@@ -13,7 +13,7 @@
                 </div>
             </div>
         </section>        
-        <v-container>            
+        <v-container style="padding-top: 60px;" v-if="pagina != null && pagina != 'undefined' && pagina.seccion_pricipal">            
             <v-row>
                 <v-col cols="12" lg="8" xl="8">
                     <div class="work-details__content-left" v-html="pagina.contenido_principal">

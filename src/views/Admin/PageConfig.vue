@@ -12,25 +12,23 @@
                     <v-tabs-items v-model="tab">
                         <v-tab-item value="tab-1">
                             <v-card>
-                                <v-container style="border: solid 1px lightgray;
-                                        margin-top: 10px;
-                                        border-radius: 15px;">
+                                <v-container style="border: solid 1px lightgray; margin-top: 10px; border-radius: 15px;">
                                     <v-row>
                                         <v-col cols="8">
-                                            <h4>Activar / Desactivar contenido Principal</h4>
+                                            <h4>Activar / Desactivar Banner</h4>
                                         </v-col>
                                         <v-col cols="4" style="text-align: right;">
-                                            <v-btn v-if="pagina.seccion_pricipal"
-                                                @click="activaDesactiva(false)">
+                                            <v-btn v-if="pagina.seccion_principal_banner"
+                                                @click="activaDesactivaBanner(false)">
                                                 <span class="fa fa-eye"></span>
                                             </v-btn>
                                             <v-btn v-else
-                                                @click="activaDesactiva(true)">
+                                                @click="activaDesactivaBanner(true)">
                                                 <span class="fa fa-eye-slash"></span>
                                             </v-btn>                                            
                                         </v-col>
-                                    </v-row>
-                                    <div v-if="pagina.seccion_pricipal">
+                                    </v-row>       
+                                    <div v-if="pagina.seccion_principal_banner">
                                         <v-row>
                                             <v-col cols="8">
                                                 <v-text-field v-model="pagina.nombre" placeholder="Nombre Secretaria">
@@ -59,10 +57,27 @@
                                                 <v-btn @click="subirArchivos()" class="btn btn-primary">Guardar</v-btn>
                                             </v-col>
                                         </v-row>
-                                    </div>
+                                    </div>                                    
                                 </v-container>
-                                <v-container style="border: solid 1px lightgray;
-                                        margin-top: 10px;
+                                <v-container style="border: solid 1px lightgray; margin-top: 10px; border-radius: 15px;">                                 
+                                    <v-row>
+                                        <v-col cols="8">
+                                            <h4>Activar / Desactivar contenido Principal</h4>
+                                        </v-col>
+                                        <v-col cols="4" style="text-align: right;">
+                                            <v-btn v-if="pagina.seccion_pricipal"
+                                                @click="activaDesactiva(false)">
+                                                <span class="fa fa-eye"></span>
+                                            </v-btn>
+                                            <v-btn v-else
+                                                @click="activaDesactiva(true)">
+                                                <span class="fa fa-eye-slash"></span>
+                                            </v-btn>                                            
+                                        </v-col>
+                                    </v-row>
+
+                                </v-container>
+                                <v-container style="border: solid 1px lightgray; margin-top: 10px;
                                         border-radius: 15px;" v-if="pagina.seccion_pricipal">
                                     <v-row>
                                         <v-col cols="12">
@@ -558,6 +573,14 @@ export default {
             };
             this.pagina = (await this.$http.post("/Paginas/updateActivaContenidoPrincipal", post)).data;
         },
+        async activaDesactivaBanner(activa){
+            let post = {
+                id: this.$route.params.id,
+                seccion_principal_banner: activa,
+                _tipo: "",
+            };
+            this.pagina = (await this.$http.post("/Paginas/updateActivaContenidoPrincipalBanner", post)).data;
+        },        
         async setBackGround() {
             let post = {
                 id: this.id,
