@@ -13,7 +13,7 @@ if (process.env.NODE_ENV == 'development') {
     axios.defaults.baseURL = 'http://localhost:5000';
 }
 else {
-    axios.defaults.baseURL = 'http://10.0.0.200/institucional_api';
+    axios.defaults.baseURL = 'https://vecino.villaallende.gov.ar/institucional_api';
 }
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = window.location.origin;
 axios.defaults.headers.common['Access-Control-Allow-Methods'] = '*';
