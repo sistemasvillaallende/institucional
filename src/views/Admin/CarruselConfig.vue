@@ -22,13 +22,13 @@
                     <table style="width: 100%">
                         <Draggable :list="slides" tag="tbody" @end="saveorden()">
                             <tr v-for="(item, index) in slides" :key="index" :style="[
-                                item.activo
-                                    ? { padding: '5px' }
-                                    : {
-                                        'background-color': '#d3d3d359',
-                                        opacity: '0.5',
-                                    },
-                            ]" style="border:solid 1px lightgrey;">
+    item.activo
+        ? { padding: '5px' }
+        : {
+            'background-color': '#d3d3d359',
+            opacity: '0.5',
+        },
+]" style="border:solid 1px lightgrey;">
                                 <td><img style="height: 80px;"
                                         :src="$urlBase + '/Assets/Archivos_Pagina_Institucional/Pagina_' + item.id_page + '/' + item.img" />
                                 </td>
@@ -46,7 +46,7 @@
                                         <v-list>
                                             <v-list-item>
                                                 <v-btn text @click="editarContenido(item.id, item.img, item.titulo, item.bajada, item.callToAction, item.callToActionTipo, item.callToActionLink, item.imgDerecha, item.callToActionTarget, item.id_page_destino)
-                                                ">
+">
                                                     <v-icon small class="fa fa-edit"></v-icon>&nbsp; Editar
                                                 </v-btn>
                                             </v-list-item>
@@ -169,7 +169,24 @@
                                                 placeholder="Titulo del Slide">
                                             </v-text-field>
                                             <span>SubTitulo del Slide</span>
-                                            <VueEditor v-model="bajada"></VueEditor>
+                                            <editor v-model="bajada"
+                                                api-key="nca4ocr8a1sigzxs11jh85krowwvk01rdgz6xqgi71ra6kw6" :init="{
+    height: 500,
+    menubar: false,
+    plugins: [
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table paste code help wordcount',
+        'code',
+        'image'
+    ],
+    toolbar:
+        'undo redo | formatselect | bold italic underline  backcolor | \
+                                alignleft aligncenter alignright alignjustify | \
+                                bullist numlist outdent indent | removeformat | help | code | image',
+    extended_valid_elements: 'a[class|name|href|target|title|onclick|rel],script[type|src],iframe[src|style|width|height|scrolling|marginwidth|marginheight|frameborder],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name]'
+
+}" />
                                         </v-col>
                                         <v-col cols="6" style="margin-top:18px;">
                                             <v-text-field v-model="callToAction" label="Texto Call to Action"
@@ -241,7 +258,7 @@
 import Draggable from "vuedraggable";
 import Header from "../../components/Headers/Tramites_Paso.vue";
 import Footer from "../../components/Footer.vue";
-import { VueEditor } from 'vue2-editor'
+import Editor from '@tinymce/tinymce-vue'
 export default {
     data: () => {
         return {
@@ -280,7 +297,7 @@ export default {
         Header,
         Footer,
         Draggable,
-        VueEditor,
+        Editor,
     },
     async mounted() {
         try {
@@ -349,7 +366,7 @@ export default {
         },
 
         salir() {
-            if(this.$route.params.id != 0)
+            if (this.$route.params.id != 0)
                 this.$router.push("/PageConfig/" + this.$route.params.id);
             else
                 this.$router.push("/Home/");

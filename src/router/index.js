@@ -106,7 +106,13 @@ const routes = [{
     name: 'PageConfig',
     component: () =>
         import( /* webpackChunkName: "Home" */ '../views/Admin/PageConfig.vue'),
-},  {
+},{
+    path: '/PageConfigNew/:id',
+    name: 'PageConfigNew',
+    component: () =>
+        import( /* webpackChunkName: "Home" */ '../views/Admin/PageConfigNew.vue'),
+},   
+{
     path: '/PageList',
     name: 'PageList',
     component: () =>

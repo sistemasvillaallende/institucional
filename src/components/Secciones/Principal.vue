@@ -1,6 +1,6 @@
 <template>
     <v-container fluid style="padding: 0px; padding-bottom: 30px; max-width: 100% !important;">
-        <section class="page-header"
+        <section class="page-header" v-if="pagina.seccion_principal_banner"
         style="margin-bottom: 10px; height:460px; padding: 171px 0 138px">
             <div class="page-header-bg">
             <img style="height:460px; width: 100%;" 
@@ -60,9 +60,7 @@
             <v-card>
                 <v-card-title class="text-h5" style="text-align:center; display: block;">
                     {{ this.pagina.nombre }}
-                    <hr style="border: solid 1px lightgrey;
-              margin-top: 10px;
-              margin-bottom: 10px;" />
+                    <hr style="border: solid 1px lightgrey; margin-top: 10px; margin-bottom: 10px;" />
                 </v-card-title>
                 <v-card-text>
                     <v-row>

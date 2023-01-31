@@ -12,13 +12,14 @@
                 <div class="container" style="padding-top: 0;">
                     <div class="main-header-two__top-inner">
                         <div class="main-header-two__top-left">
-                            <p class="main-header-two__top-left-text">Seguinos en nuestras redes sociales</p>
+                            <p class="main-header-two__top-left-text"></p>
                         </div>
                         <div class="main-header-two__top-right">
                             <div class="main-header-two__top-social">
-                                <a :href="Institucional.facebook"><i class="fab fa-facebook-square"></i></a>
-                                <a :href="Institucional.twitter"><i class="fab fa-twitter"></i></a>
-                                <a :href="Institucional.youtube"><i class="fab fa-youtube"></i></a>
+                                <a style="margin-right: 10px;" :href="Institucional.facebook" v-if="Institucional.facebook !=''"><i style="font-size:28px;" class="fab fa-facebook-square"></i></a>
+                                <a style="margin-right: 10px;" :href="Institucional.twitter" v-if="Institucional.twitter !=''"><i style="font-size:28px;" class="fab fa-twitter"></i></a>
+                                <a style="margin-right: 10px;" :href="Institucional.instagram" v-if="Institucional.instagram !=''"><i style="font-size:28px;" class="fab fa-instagram"></i></a>
+                                <a style="margin-right: 10px;" :href="Institucional.youtube" v-if="Institucional.youtube !=''"><i style="font-size:28px;" class="fab fa-youtube"></i></a>
                             </div>
                         </div>
                     </div>
@@ -31,7 +32,7 @@
             " class="main-header-two__middle" style="background-color: var(--roofsie-blanco); height: 103px;">
                 <div class="container" style="padding-top:0; padding-bottom:0;">
                     <div class="main-header-two__middle-inner clearfix">
-                        <div class="main-header-two__shape-1" style="border-top: 144px solid var(--roofsie-gray);">
+                        <div class="main-header-two__shape-1" style="border-top: 144px solid #0F99CA;">
                         </div>
                         <div class="main-header-two__shape-2" style="border-top: 96px solid var(--roofsie-white);">
                         </div>
@@ -48,13 +49,13 @@
                         </div>
                         <div class="main-header-two__address">
                             <ul class="list-unstyled main-header-two__address-list"  v-if="acciones != null && acciones != 'undefined'">
-                                <li v-for="(item, index) in acciones" :key="index">
-                                    <div class="icon">
-                                        <span :class="item.icono" style="font-size: 36px; color: var(--roofsie-white);"></span>
+                                <li v-for="i in 4">
+                                    <div class="icon" style="top: 14px;">
+                                        <span :class="acciones[i-1].icono" style="font-size: 36px; color: var(--roofsie-white);"></span>
                                     </div>
                                     <div class="content" style="top:0 !important;">
-                                        <h5 style="margin-top: 15px;"><a :href="item.callToActionLink" :target="item.callToActionTarget">
-                                        {{ item.titulo }}</a></h5>
+                                        <h5 style="margin-top: 15px;"><a :href="acciones[i-1].callToActionLink" :target="acciones[i-1].callToActionTarget">
+                                        <span v-html="acciones[i-1].titulo"></span></a></h5>
                                     </div>
                                 </li>
                             </ul>
@@ -137,8 +138,8 @@
             </nav>
         </header>
         <v-navigation-drawer v-model="drawer" absolute temporary style="height: 100vh;
-                top: 0px;
-                transform: translateX(0%);
+                top: 0px;               
+                 transform: translateX(0%);
                 width: 286px;
                 z-index: 2000;
                 position: fixed;">
@@ -190,6 +191,7 @@ export default {
         drawer2: false,
         drawer: false,
         menues: null,
+        acciones: null,
         Institucional: {
             id: 0,
             nombre_sitio: "",
@@ -211,7 +213,7 @@ export default {
     async mounted() {
         try {
             this.acciones = (await this.$http.get("/AccionesPrincipales/read")).data;            
-            this.menues = (await this.$http.get("/Menu/readActivos?idPadre=" + 0)).data;
+            this.menues = (await this.$http.get("/Menu/readActivos?idPadre=" + 0 + "&idSitio=1")).data;
             this.Institucional = (await this.$http.get("/Institucional/read")).data;
 
         } catch (error) { }

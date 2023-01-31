@@ -16,7 +16,7 @@
         <div class="main-header-two__middle" style="background-color: var(--roofsie-blanco);">
             <div class="container">
                 <div class="main-header-two__middle-inner clearfix">
-                    <div class="main-header-two__shape-1" style="border-top: 144px solid var(--roofsie-gray);"></div>
+                    <div class="main-header-two__shape-1" style="border-top: 144px solid #0F99CA;"></div>
                     <div class="main-header-two__shape-2" style="border-top: 96px solid var(--roofsie-white);"></div>
                     <div class="main-header-two__shape-3"></div>
                     <div class="main-header-two__shape-4" style="background-color: var(--roofsie-base);"></div>

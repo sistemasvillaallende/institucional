@@ -68,7 +68,26 @@
                     <v-row>
                         <v-col cols="12">
                             <label>Descripcion corta</label>
-                            <VueEditor v-model="evento.descripcion"></VueEditor>
+                            <editor v-model="html"
+                        api-key="nca4ocr8a1sigzxs11jh85krowwvk01rdgz6xqgi71ra6kw6"
+                        :init="{
+                            height: 500,
+                            menubar: false,
+                            plugins: [
+                                'advlist autolink lists link image charmap print preview anchor',
+                                'searchreplace visualblocks code fullscreen',
+                                'insertdatetime media table paste code help wordcount',
+                                'code',
+                                'image'
+                            ],
+                            toolbar:
+                                'undo redo | formatselect | bold italic underline  backcolor | \
+                                alignleft aligncenter alignright alignjustify | \
+                                bullist numlist outdent indent | removeformat | help | code | image',
+                            extended_valid_elements : 'a[class|name|href|target|title|onclick|rel],script[type|src],iframe[src|style|width|height|scrolling|marginwidth|marginheight|frameborder],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name]'
+
+                        }"
+                    />
                         </v-col>
                     </v-row>
                 </v-col>
@@ -126,7 +145,26 @@
                     <v-row>
                         <v-col cols="12">
                             <label>Informacion completa</label>
-                            <VueEditor v-model="evento.mas_informacion"></VueEditor>
+                            <editor v-model="html"
+                        api-key="nca4ocr8a1sigzxs11jh85krowwvk01rdgz6xqgi71ra6kw6"
+                        :init="{
+                            height: 500,
+                            menubar: false,
+                            plugins: [
+                                'advlist autolink lists link image charmap print preview anchor',
+                                'searchreplace visualblocks code fullscreen',
+                                'insertdatetime media table paste code help wordcount',
+                                'code',
+                                'image'
+                            ],
+                            toolbar:
+                                'undo redo | formatselect | bold italic underline  backcolor | \
+                                alignleft aligncenter alignright alignjustify | \
+                                bullist numlist outdent indent | removeformat | help | code | image',
+                            extended_valid_elements : 'a[class|name|href|target|title|onclick|rel],script[type|src],iframe[src|style|width|height|scrolling|marginwidth|marginheight|frameborder],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name]'
+
+                        }"
+                    />
                         </v-col>
                     </v-row>
                 </v-col>
@@ -220,7 +258,7 @@
 import Header from "../../components/Headers/Tramites_Paso.vue";
 import Footer from "../../components/Footer.vue";
 import SubirArchivos from "../../components/SubirArchivos.vue";
-import { VueEditor } from 'vue2-editor'
+import Editor from '@tinymce/tinymce-vue'
 export default {
     data: () => {
         return {
@@ -262,7 +300,7 @@ export default {
         Header,
         Footer,
         SubirArchivos,
-        VueEditor,
+        Editor,
     },
     async mounted() {
         try {

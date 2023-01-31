@@ -136,7 +136,6 @@
 import Header from "../../components/Headers/Tramites_Paso.vue";
 import Footer from "../../components/Footer.vue";
 import SubirArchivos from "../../components/SubirArchivos.vue";
-import { VueEditor } from 'vue2-editor'
 export default {
     data: () => {
         return {
@@ -150,7 +149,6 @@ export default {
         Header,
         Footer,
         SubirArchivos,
-        VueEditor,
     },
     async mounted() {
         try {

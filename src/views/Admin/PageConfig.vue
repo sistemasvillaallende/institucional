@@ -83,7 +83,26 @@
                                         <v-col cols="12">
                                             <h4>Contenido Principal</h4>
                                             <hr />
-                                            <VueEditor v-model="pagina.contenido_principal"></VueEditor>
+                                            <editor v-model="html"
+                        api-key="nca4ocr8a1sigzxs11jh85krowwvk01rdgz6xqgi71ra6kw6"
+                        :init="{
+                            height: 500,
+                            menubar: false,
+                            plugins: [
+                                'advlist autolink lists link image charmap print preview anchor',
+                                'searchreplace visualblocks code fullscreen',
+                                'insertdatetime media table paste code help wordcount',
+                                'code',
+                                'image'
+                            ],
+                            toolbar:
+                                'undo redo | formatselect | bold italic underline  backcolor | \
+                                alignleft aligncenter alignright alignjustify | \
+                                bullist numlist outdent indent | removeformat | help | code | image',
+                            extended_valid_elements : 'a[class|name|href|target|title|onclick|rel],script[type|src],iframe[src|style|width|height|scrolling|marginwidth|marginheight|frameborder],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name]'
+
+                        }"
+                    />
                                         </v-col>
                                     </v-row>
                                     <v-row>
@@ -232,8 +251,7 @@
         <v-dialog transition="dialog-top-transition" max-width="600" style="height:350px;" v-model="dialogBackGround">
             <template v-slot:default="dialogBackGround">
                 <v-card style="height:350px; ">
-                    <v-toolbar style="
-              background-color: green !important;
+                    <v-toolbar style="background-color: green !important;
               border-color: green !important; margin-bottom:50px;
             " dark>Seleccione el color de fondo de la sección</v-toolbar>
                     <v-card-text>
@@ -270,7 +288,7 @@
                 <v-container style="background-color: white !important;">
                     <v-row>
                         <v-col cols="12">
-                            <h3>Seleccione el tipo de saccion a agregar</h3>
+                            <h3>Seleccione el tipo de sección a agregar</h3>
                             <hr />
                         </v-col>
                     </v-row>
@@ -384,7 +402,7 @@
                             <div class="project-one__single">
                                 <div class="project-one__img-box">
                                     <div class="project-one__img">
-                                        <img :src="$urlBase + '/Assets/img/HTML.png'" alt="">
+                                        <img :src="$urlBase + '/Assets/img/cards.png'" alt="">
                                     </div>
                                     <div class="project-one__content">
                                         <h4 class="project-one__title"><a @click="crearSeccion(8)">Tarjeta <br /> con
@@ -395,6 +413,50 @@
                                 </div>
                             </div>
                         </v-col>
+                        <v-col cols="3">
+                            <div class="project-one__single">
+                                <div class="project-one__img-box">
+                                    <div class="project-one__img">
+                                        <img :src="$urlBase + '/Assets/img/cards2.png'" alt="">
+                                    </div>
+                                    <div class="project-one__content">
+                                        <h4 class="project-one__title"><a @click="crearSeccion(10)">Tarjeta <br /> con
+                                                imagen 2
+                                            </a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </v-col>       
+                        <v-col cols="3">
+                            <div class="project-one__single">
+                                <div class="project-one__img-box">
+                                    <div class="project-one__img">
+                                        <img :src="$urlBase + '/Assets/img/HTML.png'" alt="">
+                                    </div>
+                                    <div class="project-one__content">
+                                        <h4 class="project-one__title"><a @click="crearSeccion(11)">Linea de <br />
+                                                Tiempo
+                                            </a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </v-col>    
+                        <v-col cols="3">
+                            <div class="project-one__single">
+                                <div class="project-one__img-box">
+                                    <div class="project-one__img">
+                                        <img :src="$urlBase + '/Assets/img/HTML.png'" alt="">
+                                    </div>
+                                    <div class="project-one__content">
+                                        <h4 class="project-one__title"><a @click="crearSeccion(9)">Carrusel
+                                            </a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </v-col>                                                              
                     </v-row>
 
                 </v-container>
@@ -511,11 +573,21 @@ a:hover,
 a:focus {
     box-shadow: 0 1px var(--roofsie-white)
 }
+.project-one__single {
+    border: solid 1px darkgray;
+}
 </style>
 <script>
 import Draggable from "vuedraggable";
 import Header from "../../components/Headers/Tramites_Paso.vue";
-import { VueEditor } from 'vue2-editor'
+import Editor from '@tinymce/tinymce-vue'
+
+  // Import this component
+  import Trumbowyg from 'vue-trumbowyg';
+  
+  // Import editor css
+  import 'trumbowyg/dist/ui/trumbowyg.css';
+
 export default {
     data: () => {
         return {
@@ -548,13 +620,19 @@ export default {
                 horario_atension: "",
                 _tipo: "",
                 background_color: "",
-            }
+            },
+            content: null,
+        config: {
+          // Get options from 
+          // https://alex-d.github.io/Trumbowyg/documentation
+        }  
         };
     },
     components: {
         Header,
-        VueEditor,
+        Editor,
         Draggable,
+        Trumbowyg,
     },
     async mounted() {
         try {
@@ -677,11 +755,15 @@ export default {
                 this.idSeccion = (await this.$http.post("/Seccion/insert", post)).data;
                 this.$router.push("/HTMLConfig/" + this.idSeccion);
             }
-            if (tipo == 8) {
+            if (tipo == 8 || tipo == 10 || tipo == 11) {
 
                 this.idSeccion = (await this.$http.post("/Seccion/insert", post)).data;
                 this.$router.push("/CardConfig/" + this.pagina.id + "/" + this.idSeccion);
             }
+            if (tipo == 9) {
+                this.idSeccion = (await this.$http.post("/Seccion/insert", post)).data;
+                this.$router.push("/CarruselConfig/" + this.pagina);
+            }            
         },
         editaSeccion(id, tipo) {
             if (tipo <= 3) {
@@ -699,7 +781,7 @@ export default {
             if (tipo == 7) {
                 this.$router.push("/HTMLConfig/" + id);
             }
-            if (tipo == 8) {
+            if (tipo == 8 || tipo == 10 || tipo == 11) {
                 this.$router.push("/CardConfig/" + this.pagina.id + '/' + id);
             }
         },

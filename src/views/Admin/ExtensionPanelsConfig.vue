@@ -94,8 +94,7 @@
         <v-dialog transition="dialog-top-transition" max-width="600" v-model="dialogOk">
             <template v-slot:default="dialogOk">
                 <v-card>
-                    <v-toolbar style="
-              background-color: green !important;
+                    <v-toolbar style="background-color: green !important;
               border-color: green !important;
             " dark>Felicidades!</v-toolbar>
                     <v-card-text>
@@ -146,7 +145,7 @@
                         <v-text-field v-model="titulo_contenido" style="margin-top:40px;"
                             placeholder="Titulo de la Pestaña / Panel de Extencion"></v-text-field>
                         <h4 style="font-size: 20px;  margin-bottom: 10px;">Contenido de la sección</h4>
-                        <VueEditor v-model="contenido_contenido"></VueEditor>
+                        
                     </v-card-text>
                     <v-card-actions class="justify-end">
                         <v-btn text @click="dialogArchivos.value = false">Cancelar</v-btn>
@@ -204,7 +203,7 @@ export default {
             seccion: null,
             id_contenido: 0,
             titulo_contenido: "",
-            contenido_contenido: "",
+            contenido_contenido: ""
         };
     },
     components: {
@@ -259,6 +258,7 @@ export default {
             this.dialogContenido = true;
         },
         async guardarContenido() {
+            alert(this.contenido_contenido);
             let post = {
                 id: this.id_contenido,
                 titulo_contenido: this.titulo_contenido,

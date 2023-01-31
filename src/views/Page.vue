@@ -28,6 +28,8 @@ import News from "../components/News.vue";
 import Agenda from "../components/Agenda/Agenda.vue";
 import Carrusel from "../components/Carrusel.vue";
 import Cards from "../components/Secciones/Cards.vue";
+import Cards2 from "../components/Secciones/Cards2.vue";
+import Timeline from "../components/Secciones/TimeLine.vue";
 
 export default {
     data: () => {
@@ -47,6 +49,8 @@ export default {
     "htmllibre": Htmllibre,
     "carrusel": Carrusel,
     "cards": Cards,
+    "cards2": Cards2,
+    "timeline": Timeline,    
     Principal,
     Agenda,
 },

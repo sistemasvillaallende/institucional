@@ -19,16 +19,16 @@
             <v-row>
                 <v-col cols="12">
                     <v-expansion-panels>
-                        <v-expansion-panel v-for="(item, i) in seccion.lstContenido" :key="i">
-                            <v-expansion-panel-header style="font-size: 24px;">
+                        <v-expansion-panel v-for="(item, i) in seccion.lstContenido" :key="i" style="margin-bottom: 10px;">
+                            <v-expansion-panel-header style="font-size: 20px; color: #6f6f6e;">
                                 {{ item.titulo_contenido }}
                             </v-expansion-panel-header>
                             <v-expansion-panel-content>
                                 <div v-html="item.contenido_contenido"></div>
-                                <div v-if="item.lstArchivos.length > 0" style="padding:20px; padding-bottom: 5px;">
+                                <!--<div v-if="item.lstArchivos.length > 0" style="padding:20px; padding-bottom: 5px;">
                                     <h4>Descargas</h4>
                                     <hr/>
-                                </div>
+                                </div>-->
                                 <div v-for="(item2, i2) in item.lstArchivos" :key="i2" style="margin-top: 15px;
                                     padding-top: 15px;
                                     padding-bottom: 15px;

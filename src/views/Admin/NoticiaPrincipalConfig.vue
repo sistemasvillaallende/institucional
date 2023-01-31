@@ -24,8 +24,8 @@
                 <v-col cols="6">
                     <v-row>
                         <v-col cols="8">
-                            <v-file-input style="padding-top:5px;" v-model="files"
-                                placeholder="Subir imagenes" label="Subir imagenes" prepend-icon="fa fa-upload">
+                            <v-file-input style="padding-top:5px;" v-model="files" placeholder="Subir imagenes"
+                                label="Subir imagenes" prepend-icon="fa fa-upload">
                                 <template v-slot:selection="{ text }">
                                     <v-chip small label color="primary">
                                         {{ text }}
@@ -53,7 +53,23 @@
                             <label>Titulo</label>
                             <v-text-field style="width:100%;" solo v-model="noticia_principal.titulo">
                             </v-text-field>
-                            <VueEditor v-model="noticia_principal.contenido"></VueEditor>
+                            <editor v-model="noticia_principal.contenido" api-key="nca4ocr8a1sigzxs11jh85krowwvk01rdgz6xqgi71ra6kw6" :init="{
+                                height: 500,
+                                menubar: false,
+                                plugins: [
+                                    'advlist autolink lists link image charmap print preview anchor',
+                                    'searchreplace visualblocks code fullscreen',
+                                    'insertdatetime media table paste code help wordcount',
+                                    'code',
+                                    'image'
+                                ],
+                                toolbar:
+                                    'undo redo | formatselect | bold italic underline  backcolor | \
+                                                            alignleft aligncenter alignright alignjustify | \
+                                                            bullist numlist outdent indent | removeformat | help | code | image',
+                                extended_valid_elements: 'a[class|name|href|target|title|onclick|rel],script[type|src],iframe[src|style|width|height|scrolling|marginwidth|marginheight|frameborder],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name]'
+                            
+                            }" />
                         </div>
 
 
@@ -93,7 +109,7 @@
 <script>
 import Header from "../../components/Headers/Tramites_Paso.vue";
 import Footer from "../../components/Footer.vue";
-import { VueEditor } from 'vue2-editor';
+import Editor from '@tinymce/tinymce-vue'
 export default {
     data: () => ({
         img: "",
@@ -107,7 +123,7 @@ export default {
     components: {
         Header,
         Footer,
-        VueEditor,
+        Editor,
     },
     async mounted() {
         try {

@@ -169,8 +169,24 @@
                             <v-row>
                                 <v-col cols="12">
                                     <h4 style="font-size: 20px;  margin-bottom: 10px;">Contenido de la sección</h4>
-                                    <VueEditor v-model="cuerpo"></VueEditor>
+                                    <editor v-model="cuerpo"
+                                                api-key="nca4ocr8a1sigzxs11jh85krowwvk01rdgz6xqgi71ra6kw6" :init="{
+    height: 500,
+    menubar: false,
+    plugins: [
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table paste code help wordcount',
+        'code',
+        'image'
+    ],
+    toolbar:
+        'undo redo | formatselect | bold italic underline  backcolor | \
+                                alignleft aligncenter alignright alignjustify | \
+                                bullist numlist outdent indent | removeformat | help | code | image',
+    extended_valid_elements: 'a[class|name|href|target|title|onclick|rel],script[type|src],iframe[src|style|width|height|scrolling|marginwidth|marginheight|frameborder],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name]'
 
+}" />
                                     <v-card-actions class="justify-end">
                                         <v-btn text @click="dialogContenido.value = false">Cancelar</v-btn>
                                         <v-btn text @click="guardarContenido()">Guardar</v-btn>
@@ -218,7 +234,7 @@
 import Draggable from "vuedraggable";
 import Header from "../../components/Headers/Tramites_Paso.vue";
 import Footer from "../../components/Footer.vue";
-import { VueEditor } from 'vue2-editor';
+import Editor from '@tinymce/tinymce-vue'
 import SubirArchivos from "../../components/SubirArchivos.vue";
 export default {
     data: () => {
@@ -250,7 +266,7 @@ export default {
         Header,
         Footer,
         Draggable,
-        VueEditor,
+        Editor,
         SubirArchivos,
     },
     async mounted() {

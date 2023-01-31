@@ -10,7 +10,7 @@ import $storage from './plugins/storage';
 
 Vue.config.productionTip = false
 if (process.env.NODE_ENV == 'development') {
-    axios.defaults.baseURL = 'http://localhost:5000';
+    axios.defaults.baseURL = 'http://localhost:5136';
 }
 else {
     axios.defaults.baseURL = 'https://vecino.villaallende.gov.ar/institucional_api';
@@ -23,6 +23,7 @@ Vue.prototype.$http = axios;
 Vue.prototype.$httpAnonimo = axios;
 Vue.prototype.$storage = $storage;
 Vue.prototype.$urlBase = axios.defaults.baseURL;
+
 new Vue({
     render: h => h(App),
     router,

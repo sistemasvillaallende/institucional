@@ -1,8 +1,7 @@
 <template>
     <div v-if="cards != null && cards != 'undefined'">
         <Header></Header>
-        <v-container style="margin-top:50px; border: solid 1px lightgray;
-                                        border-radius: 15px;">
+        <v-container style="margin-top:50px; border: solid 1px lightgray; border-radius: 15px;">
             <v-row>
                 <v-col cols="12">
                     <v-text-field v-model="seccion.titulo" placeholder="Titulo de la Sección"></v-text-field>
@@ -19,9 +18,9 @@
                     <v-btn class="btn btn-primary" @click="updateSeccion()">Guardar</v-btn>
                 </v-col>
             </v-row>
-        </v-container>        
-        <v-container style="margin-top:50px; border: solid 1px lightgray;
-                                        border-radius: 15px; margin-bottom: 50px; min-height: 350px;;">
+        </v-container>
+        <v-container
+            style="margin-top:50px; border: solid 1px lightgray; border-radius: 15px; margin-bottom: 50px; min-height: 350px;;">
             <v-row>
                 <v-col cols="6">
                     <h3>Configuracion de Tarjetas</h3>
@@ -40,13 +39,13 @@
                     <table style="width: 100%">
                         <Draggable :list="cards" tag="tbody" @end="saveorden()">
                             <tr v-for="(item, index) in cards" :key="index" :style="[
-                                item.activo
-                                    ? { padding: '5px' }
-                                    : {
-                                        'background-color': '#d3d3d359',
-                                        opacity: '0.5',
-                                    },
-                            ]" style="border:solid 1px lightgrey;">
+    item.activo
+        ? { padding: '5px' }
+        : {
+            'background-color': '#d3d3d359',
+            opacity: '0.5',
+        },
+]" style="border:solid 1px lightgrey;">
                                 <td style="padding:10px;"><img style="height: 80px;"
                                         :src="$urlBase + '/Assets/Archivos_Pagina_Institucional/Pagina_' + item.id_page + '/' + item.imagen" />
                                 </td>
@@ -63,7 +62,8 @@
                                         </template>
                                         <v-list>
                                             <v-list-item>
-                                                <v-btn text @click="editarContenido(item.id, item.imagen, item.titulo, item.bajada, item.callToActionTexto, item.callToActionlink, item.callToActionTarget, item.callToActionTipo)">
+                                                <v-btn text
+                                                    @click="editarContenido(item.id, item.imagen, item.titulo, item.subtitulo, item.bajada, item.callToActionTexto, item.callToActionlink, item.callToActionTarget, item.callToActionTipo)">
                                                     <v-icon small class="fa fa-edit"></v-icon>&nbsp; Editar
                                                 </v-btn>
                                             </v-list-item>
@@ -185,10 +185,20 @@
                                             <v-text-field v-model="titulo" label="Titulo de la tarjeta"
                                                 placeholder="Titulo de la tarjeta">
                                             </v-text-field>
+                                            <v-text-field v-model="subtitulo" label="Sub Titulo de la tarjeta"
+                                                placeholder="Sub Titulo de la tarjeta">
+                                            </v-text-field>
                                             <span>Texto de la tarjeta</span>
                                             <VueEditor v-model="bajada"></VueEditor>
+                                            <div style="text-align:right; padding-top:50px;">
+                                                <v-btn @click="dialogContenido.value = false" class="btn btn-primay">
+                                                    Cancelar
+                                                </v-btn>&nbsp;
+                                                <v-btn @click="crearModificarSlide()" class="btn btn-primay">Guardar
+                                                </v-btn>
+                                            </div>                                            
                                         </v-col>
-                                        <v-col cols="6" style="margin-top:18px;">
+                                        <v-col cols="6" style="margin-top:18px;" v-if="seccion.tipo == 8">
                                             <v-text-field v-model="callToActionTexto" label="Texto Call to Action"
                                                 placeholder="Texto Call to Action">
                                             </v-text-field>
@@ -203,14 +213,6 @@
 
                                             <v-select :items="paginas" item-text="nombre" item-value="id" v-else
                                                 v-model="input.id" label="Paginas del sitio"></v-select>
-
-                                            <div style="text-align:right; padding-top:50px;">
-                                                <v-btn @click="dialogContenido.value = false" class="btn btn-primay">
-                                                    Cancelar
-                                                </v-btn>&nbsp;
-                                                <v-btn @click="crearModificarSlide()" class="btn btn-primay">Guardar
-                                                </v-btn>
-                                            </div>
                                         </v-col>
                                     </v-row>
                                 </v-card-text>
@@ -225,20 +227,11 @@
         <v-dialog transition="dialog-top-transition" max-width="600" v-model="dialogDelete">
             <template v-slot:default="dialogDelete">
                 <v-card>
-                    <v-toolbar style="
-              background-color: red !important;
-              border-color: red !important;
-            " dark>
+                    <v-toolbar style="background-color: red !important; border-color: red !important;" dark>
                         <v-card-title>Confirmar</v-card-title>
                     </v-toolbar>
                     <v-card-text>
-                        <div style="
-                margin-top: 20px;
-                text-align: center;
-                color: black;
-                font-size: 20px;
-                font-family: 'DM Sans';
-              ">
+                        <div style="margin-top: 20px;text-align: center; color: black; font-size: 20px; font-family: 'DM Sans';">
                             ¿Esta seguro de eliminar el contenido?
                         </div>
                     </v-card-text>
@@ -250,8 +243,7 @@
             </template>
         </v-dialog>
     </div>
-</template>
-<style scoped>
+</template><style scoped>
 
 </style>
 <script>
@@ -282,6 +274,7 @@ export default {
             id: "",
             imagen: "",
             titulo: "",
+            subtitulo: "",
             bajada: "",
             callToActionTexto: "",
             callToActionlink: "",
@@ -341,6 +334,7 @@ export default {
             let post = {
                 id: this.id,
                 titulo: this.titulo,
+                subtitulo: this.subtitulo,
                 bajada: this.bajada,
                 callToActionTexto: this.callToActionTexto,
                 callToActionTipo: this.select,
@@ -372,7 +366,7 @@ export default {
         },
 
         salir() {
-            if(this.$route.params.id != 0)
+            if (this.$route.params.id != 0)
                 this.$router.push("/PageConfig/" + this.$route.params.id_page);
             else
                 this.$router.push("/Home/");
@@ -381,6 +375,7 @@ export default {
             this.id = 0;
             this.imagen = "";
             this.titulo = "";
+            this.subtitulo = "";
             this.bajada = "";
             this.callToActionTexto = "";
             this.callToActionTipo = "";
@@ -390,10 +385,11 @@ export default {
             this.dialogContenido = true;
             this.id_page_destino = 0;
         },
-        editarContenido(id, imagen, titulo, bajada, callToActionTexto, callToActionlink, callToActionTarget, callToActionTipo) {
+        editarContenido(id, imagen, titulo, subtitulo, bajada, callToActionTexto, callToActionlink, callToActionTarget, callToActionTipo) {
             this.id = id;
             this.imagen = imagen;
             this.titulo = titulo;
+            this.subtitulo = subtitulo;
             this.bajada = bajada;
             this.callToActionTexto = callToActionTexto;
             this.callToActionTipo = callToActionTipo;
@@ -404,6 +400,8 @@ export default {
             this.select = callToActionTipo;
             this.selecttarget = callToActionTarget;
             this.input.id = id_page_destino;
+
+            alert(this.bajada);
         },
         async saveorden() {
             (await this.$http.post("/Card/updateOrden", this.cards));

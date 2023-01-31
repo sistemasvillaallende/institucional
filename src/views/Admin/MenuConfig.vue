@@ -210,7 +210,7 @@
 import Draggable from "vuedraggable";
 import Header from "../../components/Headers/Tramites_Paso.vue";
 import Footer from "../../components/Footer.vue";
-import { VueEditor } from 'vue2-editor'
+import Editor from '@tinymce/tinymce-vue'
 export default {
     data: () => {
         return {
@@ -245,7 +245,7 @@ export default {
         Header,
         Footer,
         Draggable,
-        VueEditor,
+        Editor,
     },
     async mounted() {
         try {

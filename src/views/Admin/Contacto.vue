@@ -74,18 +74,9 @@
         <v-dialog transition="dialog-top-transition" max-width="600" v-model="dialogOk">
             <template v-slot:default="dialogOk">
                 <v-card>
-                    <v-toolbar style="
-              background-color: green !important;
-              border-color: green !important;
-            " dark>Felicidades!</v-toolbar>
+                    <v-toolbar style="background-color: green !important; border-color: green !important;" dark>Felicidades!</v-toolbar>
                     <v-card-text>
-                        <div style="
-                margin-top: 20px;
-                text-align: center;
-                color: black;
-                font-size: 20px;
-                font-family: 'DM Sans';
-              ">
+                        <div style="margin-top: 20px; text-align: center; color: black; font-size: 20px; font-family: 'DM Sans';">
                             Los datos se actualizaron de forma correcta
                         </div>
                     </v-card-text>
@@ -95,6 +86,21 @@
                 </v-card>
             </template>
         </v-dialog>
+        <v-dialog transition="dialog-top-transition" max-width="600" v-model="dialogError">
+            <template v-slot:default="dialogError">
+                <v-card>
+                    <v-toolbar style="background-color: red !important; border-color: red !important;" dark>Error!</v-toolbar>
+                    <v-card-text>
+                        <div style="margin-top: 20px; text-align: center; color: black; font-size: 20px; font-family: 'DM Sans';">
+                            <v-text-field v-model="msjError"></v-text-field>
+                        </div>
+                    </v-card-text>
+                    <v-card-actions class="justify-end">
+                        <v-btn text @click="dialogError.value = false">Salir</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </template>
+        </v-dialog>        
     </div>
 </template>
 <style>
@@ -109,6 +115,8 @@ import Footer from "../../components/Footer.vue";
 export default {
     data: () => {
         return {
+            msjError: "",
+            dialogError: false,
             dialogRedes: false,
             dialogOk: false,
             files: [],
@@ -182,6 +190,26 @@ export default {
 
         },
         async update() {
+            if(this.Institucional.direccion.trim() == ''){
+                this.msjError = "Por favor ingrese la direccion";
+                this.dialogError = true;
+                return;
+            }
+            if(this.Institucional.codigo_postal.trim() == ''){
+                this.msjError = "Por favor ingrese el codigo postal";
+                this.dialogError = true;
+                return;
+            }
+            if(this.Institucional.telefono.trim() == ''){
+                this.msjError = "Por favor ingrese el telefono";
+                this.dialogError = true;
+                return;
+            }
+            if(this.Institucional.mail.trim() == ''){
+                this.msjError = "Por favor ingrese el mail";
+                this.dialogError = true;
+                return;
+            }                                    
             let post = {
                 id: 1,
                 direccion: this.Institucional.direccion,
